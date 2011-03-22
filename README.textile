@@ -1,0 +1,14 @@
+h1. README
+
+FluentMail is a port of "fluent-mail-api":https://github.com/guilhermechapiewski/fluent-mail-api library written entirely in C# for the .NET platform.
+
+h2. Usage
+
+<pre><code>
+new EmailMessage()
+	.From("bauer@ctu.gov.us")
+	.To("chloe@ctu.gov.us")
+	.WithSubject("Subject")
+	.WithBody("Body")
+	.Send();
+</code></pre>

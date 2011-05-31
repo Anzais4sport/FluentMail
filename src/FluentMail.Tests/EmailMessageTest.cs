@@ -120,17 +120,14 @@ namespace FluentMail.Tests
         [TestMethod]
         public void ShouldCallPostalServiceSendWhenParametersAreCorrect()
         {
-            var postalService = new Mock<IPostalService>();
-            var emailMessage = new EmailMessage { PostalService = postalService.Object };
-
-            emailMessage
+            new EmailMessage()
                 .From("bauer@ctu.gov.us")
                 .To("chloe@ctu.gov.us")
                 .WithSubject("Subject")
                 .WithBody("Body")
                 .Send();
 
-            postalService.Verify(ps => ps.Send(emailMessage));
+            Assert.AreEqual(1, PostalServiceFake.SendCount);
         }
 
         [TestMethod]

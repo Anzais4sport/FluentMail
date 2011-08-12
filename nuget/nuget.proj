@@ -1,0 +1,44 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Default">
+    <UsingTask AssemblyFile="$(BaseDir)\tools\msbuild.community.tasks.dll" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
+
+    <PropertyGroup>
+        <BaseDir>$(MSBuildProjectDirectory)</BaseDir>
+        <TempDir>$(BaseDir)\temp</TempDir>
+
+        <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+    </PropertyGroup>
+
+    <Target Name="Default" DependsOnTargets="Compile; Copy; Package; Clean" />
+
+    <Target Name="Compile">
+        <MSBuild Projects="$(BaseDir)\..\src\FluentMail.sln" Properties="Configuration=$(Configuration)"  />
+    </Target>
+
+    <Target Name="Copy">
+        <ItemGroup>
+            <MainBinaries Include="$(BaseDir)\..\src\FluentMail\bin\$(Configuration)\**\*.*" />
+        </ItemGroup>
+
+        <Copy SourceFiles="$(BaseDir)\FluentMail.nuspec" DestinationFolder="$(TempDir)\FluentMail" />
+        <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(TempDir)\FluentMail\lib\NET40" />
+    </Target>
+
+    <Target Name="Package">
+        <GetAssemblyIdentity AssemblyFiles="$(TempDir)\FluentMail\lib\NET40\FluentMail.dll">
+            <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+        </GetAssemblyIdentity>
+
+        <XmlUpdate
+            Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+            XmlFileName="$(TempDir)\FluentMail\FluentMail.nuspec"
+            XPath="/package/metadata/version"
+            Value="%(AsmInfo.Version)" />
+
+        <Exec WorkingDirectory="$(BaseDir)"
+            Command="$(BaseDir)\tools\nuget.exe pack $(TempDir)\FluentMail\FluentMail.nuspec" />
+    </Target>
+
+    <Target Name="Clean">
+        <RemoveDir Directories="$(TempDir)" />
+    </Target>
+</Project>

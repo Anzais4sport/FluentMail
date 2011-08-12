@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?> 
+
+<package>
+    <metadata>
+        <id>FluentMail</id>
+        <version></version>
+        <authors>Fabiano França</authors>
+        <description>FluentMail is a port of fluent-mail-api library written entirely in C# for the .NET platform.</description>
+        <language>en-US</language>
+        <licenseUrl>http://github.com/fabiano/FluentMail</licenseUrl>
+        <projectUrl>http://github.com/fabiano/FluentMail</projectUrl>
+    </metadata>
+</package>

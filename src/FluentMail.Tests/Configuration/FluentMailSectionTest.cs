@@ -11,8 +11,8 @@ namespace FluentMail.Tests.Configuration
         [TestMethod]
         public void ShouldLoadFluentMailSection()
         {
-            FluentMailSection config = (FluentMailSection)
-                System.Configuration.ConfigurationManager.GetSection("fluentMail");
+            var config = (FluentMailSection)
+                ConfigurationManager.GetSection("fluentMail");
 
             Assert.IsNotNull(config);
         }
@@ -20,8 +20,8 @@ namespace FluentMail.Tests.Configuration
         [TestMethod]
         public void ShouldLoadPostalServiceElement()
         {
-            FluentMailSection config = (FluentMailSection)
-                System.Configuration.ConfigurationManager.GetSection("fluentMail");
+            var config = (FluentMailSection)
+                ConfigurationManager.GetSection("fluentMail");
 
             Assert.IsNotNull(config.PostalService);
         }
@@ -29,8 +29,8 @@ namespace FluentMail.Tests.Configuration
         [TestMethod]
         public void ShouldReadPostalServiceType()
         {
-            FluentMailSection config = (FluentMailSection)
-                System.Configuration.ConfigurationManager.GetSection("fluentMail");
+            var config = (FluentMailSection)
+                ConfigurationManager.GetSection("fluentMail");
 
             Assert.IsNotNull(config.PostalService.Type);
             Assert.AreEqual(typeof(PostalServiceFake), config.PostalService.Type);
@@ -41,8 +41,8 @@ namespace FluentMail.Tests.Configuration
         {
             try
             {
-                FluentMailSection config = (FluentMailSection)
-                    System.Configuration.ConfigurationManager.GetSection("fluentMail-postalservice-not-provided");
+                var config = (FluentMailSection)
+                    ConfigurationManager.GetSection("fluentMail-postalservice-not-provided");
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -55,8 +55,8 @@ namespace FluentMail.Tests.Configuration
         {
             try
             {
-                FluentMailSection config = (FluentMailSection)
-                    System.Configuration.ConfigurationManager.GetSection("fluentMail-postalservice-empty");
+                var config = (FluentMailSection)
+                    ConfigurationManager.GetSection("fluentMail-postalservice-empty");
 
                 Assert.Fail();
             }
@@ -69,8 +69,8 @@ namespace FluentMail.Tests.Configuration
         [TestMethod]
         public void ShouldLoadEmailAddressValidatorElement()
         {
-            FluentMailSection config = (FluentMailSection)
-                System.Configuration.ConfigurationManager.GetSection("fluentMail");
+            var config = (FluentMailSection)
+                ConfigurationManager.GetSection("fluentMail");
 
             Assert.IsNotNull(config.EmailAddressValidator);
         }
@@ -78,8 +78,8 @@ namespace FluentMail.Tests.Configuration
         [TestMethod]
         public void ShouldReadEmailAddressValidatorType()
         {
-            FluentMailSection config = (FluentMailSection)
-                System.Configuration.ConfigurationManager.GetSection("fluentMail");
+            var config = (FluentMailSection)
+                ConfigurationManager.GetSection("fluentMail");
 
             Assert.IsNotNull(config.EmailAddressValidator.Type);
             Assert.AreEqual(typeof(EmailAddressValidator), config.EmailAddressValidator.Type);
@@ -90,8 +90,8 @@ namespace FluentMail.Tests.Configuration
         {
             try
             {
-                FluentMailSection config = (FluentMailSection)
-                    System.Configuration.ConfigurationManager.GetSection("fluentMail-emailaddressvalidator-not-provided");
+                var config = (FluentMailSection)
+                    ConfigurationManager.GetSection("fluentMail-emailaddressvalidator-not-provided");
             }
             catch (ConfigurationErrorsException ex)
             {
@@ -104,8 +104,8 @@ namespace FluentMail.Tests.Configuration
         {
             try
             {
-                FluentMailSection config = (FluentMailSection)
-                    System.Configuration.ConfigurationManager.GetSection("fluentMail-emailaddressvalidator-empty");
+                var config = (FluentMailSection)
+                    ConfigurationManager.GetSection("fluentMail-emailaddressvalidator-empty");
 
                 Assert.Fail();
             }

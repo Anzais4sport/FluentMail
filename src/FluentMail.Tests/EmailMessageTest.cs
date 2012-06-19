@@ -97,27 +97,6 @@ namespace FluentMail.Tests
         }
 
         [TestMethod]
-        public void ShouldSendMailWhenParametersAreCorrect()
-        {
-            var emailBuilder = new Mock<IEmailBuilder>();
-            
-            emailBuilder.Setup(e => e.From("bauer@ctu.gov.us")).Returns(emailBuilder.Object).Verifiable();
-            emailBuilder.Setup(e => e.To("chloe@ctu.gov.us")).Returns(emailBuilder.Object).Verifiable();
-            emailBuilder.Setup(e => e.WithSubject("Subject")).Returns(emailBuilder.Object).Verifiable();
-            emailBuilder.Setup(e => e.WithBody("Body")).Returns(emailBuilder.Object).Verifiable();
-
-            emailBuilder.Object
-                .From("bauer@ctu.gov.us")
-                .To("chloe@ctu.gov.us")
-                .WithSubject("Subject")
-                .WithBody("Body")
-                .Send();
-
-            emailBuilder.Verify();
-            emailBuilder.Verify(e => e.Send());
-        }
-
-        [TestMethod]
         public void ShouldCallPostalServiceSendWhenParametersAreCorrect()
         {
             new EmailMessage()
